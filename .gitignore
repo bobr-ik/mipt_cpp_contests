@@ -1,68 +1,26 @@
-# Prerequisites
-*.d
+# игнорировать всё
+*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# но не игнорировать папки
+!*/
 
-# Precompiled Headers
-*.gch
-*.pch
+/.vscode
 
-# Linker files
-*.ilk
+# разрешить исходники
+!*.cpp
+!*.h
+!*.hpp
+!*.c
+!*.cc
+!*.cxx
 
-# Debugger Files
-*.pdb
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
-build/
-Build/
-build-*/
-
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
-
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
+# разрешить конфиги и прочее
+!*.md
+!*.txt
+!*.yml
+!*.yaml
+!*.cmake
+!CMakeLists.txt
+!Makefile
+!.gitignore
