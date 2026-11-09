@@ -1,3 +1,4 @@
+#pragma once
 #include "Inventory.hpp"
 
 class Helmet : public InventoryItem {
