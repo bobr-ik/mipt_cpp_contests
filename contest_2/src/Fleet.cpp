@@ -5,8 +5,14 @@
 #include <string>
 
 #include "../include/Errors.hpp"
+#include "../include/ServiceCenter.hpp"
 
-void Fleet::addItem(std::shared_ptr<InventoryItem> item) { items.push_back(item); }
+Fleet::Fleet(ServiceCenter& service_center) : service_center(service_center) {}
+
+void Fleet::addItem(std::unique_ptr<InventoryItem> item) {
+  service_center.inspect(*item);
+  items.push_back(std::shared_ptr<InventoryItem>(std::move(item)));
+}
 
 void Fleet::focus(const std::string id) {
   for (const auto& item : items) {
