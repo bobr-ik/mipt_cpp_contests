@@ -1,10 +1,10 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "Inventory.hpp"
-#include "ServiceCenter.hpp"
-#include "Registry.hpp"
 
+#include "Inventory.hpp"
+#include "Registry.hpp"
+#include "ServiceCenter.hpp"
 
 class Fleet {
  private:
@@ -13,7 +13,7 @@ class Fleet {
   ServiceCenter& service_center;
 
   Registry<std::string, 5> event_log;
-  Registry<std::shared_ptr<InventoryItem>, 3> recent_items; 
+  Registry<std::shared_ptr<InventoryItem>, 3> recent_items;
 
  public:
   Fleet(ServiceCenter& service_center);
@@ -31,6 +31,6 @@ class Fleet {
 
   void remove(const std::string& id);
 
-  void printLog() const; 
-  void printRecent() const; 
+  void printLog() const;
+  void printRecent() const;
 };

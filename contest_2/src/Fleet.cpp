@@ -86,9 +86,9 @@ void Fleet::printLog() const {
 }
 
 void Fleet::printRecent() const {
-    std::cout << "--- Recent Items ---\n";
-    for (int i = 0; i < recent_items.size(); ++i) {
-        std::cout << *recent_items[i] << "\n"; 
-    }
-    std::cout << "--------------------\n";
+  std::cout << "--- Recent Items ---\n";
+  for (int i = 0; i < recent_items.size(); ++i) {
+    std::cout << *recent_items[i] << "\n";
+  }
+  std::cout << "--------------------\n";
 }

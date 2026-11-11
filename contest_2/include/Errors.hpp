@@ -27,7 +27,6 @@ class InvalidOperation : public FleetOperationError {
  public:
   explicit InvalidOperation(const std::string& more_info = "")
       : FleetOperationError("Invalid operator. " + more_info) {}
-
 };
 
 class InspectionError : public FleetOperationError {
@@ -43,7 +42,7 @@ class RemoveError : public FleetOperationError {
 };
 
 class Quit : std::exception {
-  protected:
+ protected:
   std::string message;
 
  public:

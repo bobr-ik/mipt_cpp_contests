@@ -18,6 +18,4 @@ std::string DockStation::getDescription() const {
          ", energy_consumption: " + s_energy_consumption;
 }
 
-double DockStation::getEnergyConsumption() const {
-  return energy_consumption;
-}
+double DockStation::getEnergyConsumption() const { return energy_consumption; }

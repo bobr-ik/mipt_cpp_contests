@@ -1,22 +1,17 @@
-#include <string>
+#include "../include/ServiceCenter.hpp"
+
 #include <algorithm>
 #include <cctype>
-#include "../include/ServiceCenter.hpp"
+#include <string>
 
 #include "../include/Errors.hpp"
 
 ServiceCenter::ServiceCenter(std::string banword) : banword(banword) {}
 
-
 bool ServiceCenter::containsCaseInsensitive(const std::string& str, const std::string& substr) {
-    auto it = std::search(
-        str.begin(), str.end(),
-        substr.begin(), substr.end(),
-        [](char ch1, char ch2) { 
-            return std::tolower(ch1) == std::tolower(ch2); 
-        }
-    );
-    return it != str.end();
+  auto it = std::search(str.begin(), str.end(), substr.begin(), substr.end(),
+                        [](char ch1, char ch2) { return std::tolower(ch1) == std::tolower(ch2); });
+  return it != str.end();
 }
 
 void ServiceCenter::inspect(const InventoryItem& item) {
