@@ -15,8 +15,11 @@ Bike::Bike(std::string id, std::string name, double difficulty_score)
     : Transport(id, name, difficulty_score) {}
 
 std::string Bike::getDescription() const {
+  
+  std::string s_difficulty_score = std::to_string(difficulty_score);
+  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
   return "Bike. id: " + id + ", name: " + name +
-         ", difficulty_score: " + std::to_string(difficulty_score);
+         ", difficulty_score: " + s_difficulty_score;
 }
 
 // EBike
@@ -27,9 +30,17 @@ EBike::EBike(std::string id, std::string name, double difficulty_score, double e
 double EBike::getEnergyConsumption() const { return energy_consumption; }
 
 std::string EBike::getDescription() const {
+  
+  std::string s_energy_consumption = std::to_string(energy_consumption);
+  s_energy_consumption = s_energy_consumption.substr(0, s_energy_consumption.find('.') + 2);
+
+  
+  std::string s_difficulty_score = std::to_string(difficulty_score);
+  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
+
   return "EBike. id: " + id + ", name: " + name +
-         ", difficulty_score: " + std::to_string(difficulty_score) +
-         ", energy_consumption: " + std::to_string(energy_consumption);
+         ", difficulty_score: " + s_difficulty_score +
+         ", energy_consumption: " + s_energy_consumption;
 }
 
 // Scooter
@@ -41,7 +52,14 @@ Scooter::Scooter(std::string id, std::string name, double difficulty_score,
 double Scooter::getEnergyConsumption() const { return energy_consumption; }
 
 std::string Scooter::getDescription() const {
+  std::string s_energy_consumption = std::to_string(energy_consumption);
+  s_energy_consumption = s_energy_consumption.substr(0, s_energy_consumption.find('.') + 2);
+
+  
+  std::string s_difficulty_score = std::to_string(difficulty_score);
+  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
+
   return "Scooter. id: " + id + ", name: " + name +
-         ", difficulty_score: " + std::to_string(difficulty_score) +
-         ", energy_consumption: " + std::to_string(energy_consumption);
+         ", difficulty_score: " + s_difficulty_score +
+         ", energy_consumption: " + s_energy_consumption;
 }

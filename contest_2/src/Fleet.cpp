@@ -10,6 +10,10 @@
 Fleet::Fleet(ServiceCenter& service_center) : service_center(service_center) {}
 
 void Fleet::addItem(std::unique_ptr<InventoryItem> item) {
+  if (item == nullptr) {
+    throw InvalidArgument("Cannot add nullptr");
+  }
+
   service_center.inspect(*item);
   items.push_back(std::shared_ptr<InventoryItem>(std::move(item)));
 }
@@ -25,9 +29,9 @@ void Fleet::focus(const std::string id) {
 }
 
 void Fleet::printList() {
-  std::sort(items.begin(), items.end());
+  std::sort(items.begin(), items.end(), [](const auto& a, const auto& b) { return *a < *b; });
   for (const auto& item : items) {
-    std::cout << item << '\n';
+    std::cout << *item << '\n';
   }
 }
 
@@ -36,7 +40,7 @@ void Fleet::printNovice() const {
   for (const auto& item : items) {
     if (item->isForNovice()) {
       is_empty = false;
-      std::cout << item << '\n';
+      std::cout << *item << '\n';
     }
   }
   if (is_empty) {
@@ -52,4 +56,17 @@ double Fleet::getEnergy() const {
     }
   }
   return total_energy_consumption;
+}
+
+std::weak_ptr<InventoryItem> Fleet::getFocusItem() const { return focus_item; }
+
+void Fleet::remove(const std::string& id) {
+  for (auto it = items.begin(); it != items.end(); ++it) {
+    if ((*it)->getId() == id) {
+      items.erase(it);
+      return;
+    }
+  }
+
+  throw RemoveError("No such element with id " + id);
 }

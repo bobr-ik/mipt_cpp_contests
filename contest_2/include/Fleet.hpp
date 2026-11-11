@@ -15,11 +15,15 @@ class Fleet {
   Fleet(ServiceCenter& service_center);
   void addItem(std::unique_ptr<InventoryItem> item);
 
-  void focus(std::string id);
+  void focus(const std::string id);
 
   void printList();
 
   void printNovice() const;
 
   double getEnergy() const;
+
+  std::weak_ptr<InventoryItem> getFocusItem() const;
+
+  void remove(const std::string& id);
 };

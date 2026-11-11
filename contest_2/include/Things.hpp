@@ -11,4 +11,5 @@ class DockStation : public InventoryItem, public EnergyConsumer {
  public:
   DockStation(std::string id, std::string name, double energy_consumption);
   std::string getDescription() const override;
+  double getEnergyConsumption() const override;
 };
