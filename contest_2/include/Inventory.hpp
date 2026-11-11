@@ -24,7 +24,7 @@ class EnergyConsumer {
   double energy_consumption;
 
  public:
-  EnergyConsumer(double energy_consumption) : energy_consumption(energy_consumption) {}
+  EnergyConsumer(double energy_consumption);
   virtual double getEnergyConsumption() const = 0;
   virtual ~EnergyConsumer() = default;
 };

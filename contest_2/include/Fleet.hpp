@@ -3,6 +3,7 @@
 #include <vector>
 #include "Inventory.hpp"
 #include "ServiceCenter.hpp"
+#include "Registry.hpp"
 
 
 class Fleet {
@@ -10,6 +11,9 @@ class Fleet {
   std::vector<std::shared_ptr<InventoryItem>> items;
   std::weak_ptr<InventoryItem> focus_item;
   ServiceCenter& service_center;
+
+  Registry<std::string, 5> event_log;
+  Registry<std::shared_ptr<InventoryItem>, 3> recent_items; 
 
  public:
   Fleet(ServiceCenter& service_center);
@@ -26,4 +30,7 @@ class Fleet {
   std::weak_ptr<InventoryItem> getFocusItem() const;
 
   void remove(const std::string& id);
+
+  void printLog() const; 
+  void printRecent() const; 
 };

@@ -16,12 +16,19 @@ void Fleet::addItem(std::unique_ptr<InventoryItem> item) {
 
   service_center.inspect(*item);
   items.push_back(std::shared_ptr<InventoryItem>(std::move(item)));
+  auto shared_item = items.back();
+
+  event_log.add("Added: " + shared_item->getId());
+  recent_items.add(shared_item);
 }
 
 void Fleet::focus(const std::string id) {
   for (const auto& item : items) {
     if (item->getId() == id) {
       focus_item = item;
+      event_log.add("Focused: " + id);
+      recent_items.add(item);
+
       return;
     }
   }
@@ -64,9 +71,24 @@ void Fleet::remove(const std::string& id) {
   for (auto it = items.begin(); it != items.end(); ++it) {
     if ((*it)->getId() == id) {
       items.erase(it);
+      event_log.add("Removed: " + id);
       return;
     }
   }
 
   throw RemoveError("No such element with id " + id);
+}
+
+void Fleet::printLog() const {
+  std::cout << "--- Event Log ---\n";
+  std::cout << event_log;
+  std::cout << "-----------------\n";
+}
+
+void Fleet::printRecent() const {
+    std::cout << "--- Recent Items ---\n";
+    for (int i = 0; i < recent_items.size(); ++i) {
+        std::cout << *recent_items[i] << "\n"; 
+    }
+    std::cout << "--------------------\n";
 }

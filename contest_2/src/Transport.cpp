@@ -1,9 +1,17 @@
 #include "../include/Transport.hpp"
 
+#include <iomanip>
+#include <sstream>
+
+#include "../include/Errors.hpp"
 //  Transport
 
 Transport::Transport(std::string id, std::string name, double difficulty_score)
-    : InventoryItem(id, name), difficulty_score(difficulty_score) {}
+    : InventoryItem(id, name), difficulty_score(difficulty_score) {
+  if (difficulty_score > 10 || difficulty_score < 0) {
+    throw InvalidArgument("invalid difficulty score ");
+  }
+}
 
 bool Transport::isForNovice() const { return difficulty_score <= 5; }
 
@@ -15,11 +23,12 @@ Bike::Bike(std::string id, std::string name, double difficulty_score)
     : Transport(id, name, difficulty_score) {}
 
 std::string Bike::getDescription() const {
-  
-  std::string s_difficulty_score = std::to_string(difficulty_score);
-  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
-  return "Bike. id: " + id + ", name: " + name +
-         ", difficulty_score: " + s_difficulty_score;
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(1);
+
+  oss << "Bike. id: " << id << ", name: " << name << ", difficulty_score: " << difficulty_score;
+
+  return oss.str();
 }
 
 // EBike
@@ -30,17 +39,13 @@ EBike::EBike(std::string id, std::string name, double difficulty_score, double e
 double EBike::getEnergyConsumption() const { return energy_consumption; }
 
 std::string EBike::getDescription() const {
-  
-  std::string s_energy_consumption = std::to_string(energy_consumption);
-  s_energy_consumption = s_energy_consumption.substr(0, s_energy_consumption.find('.') + 2);
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(1);
 
-  
-  std::string s_difficulty_score = std::to_string(difficulty_score);
-  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
+  oss << "EBike. id: " << id << ", name: " << name << ", difficulty_score: " << difficulty_score
+      << ", energy_consumption: " << energy_consumption;
 
-  return "EBike. id: " + id + ", name: " + name +
-         ", difficulty_score: " + s_difficulty_score +
-         ", energy_consumption: " + s_energy_consumption;
+  return oss.str();
 }
 
 // Scooter
@@ -52,14 +57,11 @@ Scooter::Scooter(std::string id, std::string name, double difficulty_score,
 double Scooter::getEnergyConsumption() const { return energy_consumption; }
 
 std::string Scooter::getDescription() const {
-  std::string s_energy_consumption = std::to_string(energy_consumption);
-  s_energy_consumption = s_energy_consumption.substr(0, s_energy_consumption.find('.') + 2);
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(1);
 
-  
-  std::string s_difficulty_score = std::to_string(difficulty_score);
-  s_difficulty_score = s_difficulty_score.substr(0, s_difficulty_score.find('.') + 2);
+  oss << "Scooter. id: " << id << ", name: " << name << ", difficulty_score: " << difficulty_score
+      << ", energy_consumption: " << energy_consumption;
 
-  return "Scooter. id: " + id + ", name: " + name +
-         ", difficulty_score: " + s_difficulty_score +
-         ", energy_consumption: " + s_energy_consumption;
+  return oss.str();
 }

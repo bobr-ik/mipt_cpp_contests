@@ -30,15 +30,17 @@ CmdReader::CmdReader(Fleet& fleet) : fleet(fleet) {
 
   commands["novice"] = [this]() { this->fleet.printNovice(); };
 
+  commands["log"] = [this]() { this->fleet.printLog(); };
+
+  commands["recent"] = [this]() { this->fleet.printRecent(); };
+
   commands["remove"] = [this]() {
     std::string id;
     std::cin >> id;
     this->fleet.remove(id);
   };
 
-  commands["energy"] = [this]() {
-    std::cout << this->fleet.getEnergy()<< '\n';
-  };
+  commands["energy"] = [this]() { std::cout << this->fleet.getEnergy() << '\n'; };
 
   commands["add"] = [this]() {
     std::string type;
