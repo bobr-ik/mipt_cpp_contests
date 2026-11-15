@@ -12,7 +12,7 @@ CmdReader::CmdReader(Fleet& fleet) : fleet(fleet) {
 
   commands["focus"] = [this]() {
     std::string id;
-    std::cin >> id;
+    readArgs(id);
     this->fleet.focus(id);
   };
 
@@ -36,7 +36,7 @@ CmdReader::CmdReader(Fleet& fleet) : fleet(fleet) {
 
   commands["remove"] = [this]() {
     std::string id;
-    std::cin >> id;
+    readArgs(id);
     this->fleet.remove(id);
   };
 
@@ -44,7 +44,7 @@ CmdReader::CmdReader(Fleet& fleet) : fleet(fleet) {
 
   commands["add"] = [this]() {
     std::string type;
-    std::cin >> type;
+    readArgs(type);
 
     std::string id;
     std::string name;
@@ -52,24 +52,24 @@ CmdReader::CmdReader(Fleet& fleet) : fleet(fleet) {
     double energy_consumption;
 
     if (type == "bike") {
-      std::cin >> id >> name >> difficulty_score;
+      readArgs(id, name, difficulty_score);
       this->fleet.addItem(std::make_unique<Bike>(id, name, difficulty_score));
 
     } else if (type == "ebike") {
-      std::cin >> id >> name >> energy_consumption >> difficulty_score;
+      readArgs(id, name, energy_consumption, difficulty_score);
       this->fleet.addItem(std::make_unique<EBike>(id, name, difficulty_score, energy_consumption));
 
     } else if (type == "scooter") {
-      std::cin >> id >> name >> energy_consumption >> difficulty_score;
+      readArgs(id, name, energy_consumption, difficulty_score);
       this->fleet.addItem(
           std::make_unique<Scooter>(id, name, difficulty_score, energy_consumption));
 
     } else if (type == "helmet") {
-      std::cin >> id >> name;
+      readArgs(id, name);
       this->fleet.addItem(std::make_unique<Helmet>(id, name));
 
     } else if (type == "dockstation") {
-      std::cin >> id >> name >> energy_consumption;
+      readArgs(id, name, energy_consumption);
       this->fleet.addItem(std::make_unique<DockStation>(id, name, energy_consumption));
 
     } else {
