@@ -43,7 +43,7 @@ class RemoveError : public FleetOperationError {
       : FleetOperationError("Remove error. " + more_info) {}
 };
 
-class Quit : std::exception {
+class Quit : public std::exception {
  protected:
   std::string message;
 
